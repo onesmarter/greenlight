@@ -12,6 +12,12 @@
 # You should have received a copy of the GNU Lesser General Public License along
 # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 %>
+<div> <% concat {"user" => current_user,"main_room" => current_user.main_room,"current_room" => @room,
+"current_room_settings" => @room.room_settings,
+"base_url" => request.base_url,"current_room_invite_path" => @room.invite_path,
+"current-room_path" => room_path(@room), "current_room_start_path" => start_room_path(@room),
+"shared_rooms" => current_user.shared_rooms,"current_room_recordings" => @recordings,
+"shared_room" => @shared_room,"ordered_rooms" => current_user.ordered_rooms}.to_json.html_safe %> </div>
 <div> <% concat current_user.to_json.html_safe %> </div>
 <div> <% concat current_user.main_room.to_json.html_safe %> </div>
 <div> <% concat current_user.main_room.room_settings.to_json.html_safe %> </div>
