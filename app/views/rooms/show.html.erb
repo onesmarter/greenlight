@@ -83,7 +83,7 @@
             <% current_user.ordered_rooms.each do |room| %>
 
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <div r="<% room.to_json %>" p="<% room %>" ty="<% room.access_code %>" op="<% room.name %>" />
+                <div r="<% concat room.to_json %>" p="<% concat room %>" ty="<% concat room.access_code %>" op="<% concat room.name %>" />
                 <%= link_to room do %>
                 <%= render "rooms/components/room_block", room: room %>
                 <% end %>
