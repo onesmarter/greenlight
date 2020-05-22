@@ -23,7 +23,7 @@
     <div class="container">
         <div class="row pt-7 pt-sm-9">
             <div class="col-lg-8 col-sm-12">
-                <input type="hidden" value="<% @current_user %>" />
+
                 <div id="room-title" class="display-3 form-inline <%= 'edit_hover_class' if current_user.main_room != @room %>" data-path="<%= update_settings_path(@room) %>">
                     <input type="hidden" value="<% @current_user.main_room.to_json.html_safe %>" />
                     <% if current_user.main_room == @room %>
@@ -83,7 +83,7 @@
             <% current_user.ordered_rooms.each do |room| %>
 
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <% @room.to_json.html_safe do %>
+                <% @room.to_json.html_safe %>
                 <%= link_to room do %>
                 <%= render "rooms/components/room_block", room: room %>
                 <% end %>
@@ -91,7 +91,7 @@
             <% end %>
 
             <% if shared_access_allowed %>
-            <input type="hidden" value="<% @current_user.shared_rooms.to_json %>" />
+
             <% current_user.shared_rooms.each do |room| %>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <%= link_to room do %>
