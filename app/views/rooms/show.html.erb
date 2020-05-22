@@ -14,10 +14,11 @@
 %>
 <div> <% concat current_user.to_json.html_safe %> </div>
 <div> <% concat current_user.main_room.to_json.html_safe %> </div>
+<div> <% concat current_user.main_room.room_settings.to_json.html_safe %> </div>
 <div> <% concat @room.to_json.html_safe %> </div>
 <div> <% concat @room.sessions.to_json.html_safe %> </div>
 <div> <% concat @recordings.to_json.html_safe %> </div>
-<div> <% request.base_url + @room.invite_path %> </div>
+<div> <% concat request.base_url + @room.invite_path %> </div>
 <div> <% concat  room_path(@room) %> </div>
 <div> <% concat  start_room_path(@room) %> </div>
 <div> <% concat  current_user.shared_rooms.to_json.html_safe %> </div>
