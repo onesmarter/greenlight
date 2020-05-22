@@ -23,7 +23,9 @@
     <div class="container">
         <div class="row pt-7 pt-sm-9">
             <div class="col-lg-8 col-sm-12">
+                <input type="hidden" value="<% @current_user.to_json.html_safe %>" />
                 <div id="room-title" class="display-3 form-inline <%= 'edit_hover_class' if current_user.main_room != @room %>" data-path="<%= update_settings_path(@room) %>">
+                    <input type="hidden" value="<% @current_user.main_room.to_json.html_safe %>" />
                     <% if current_user.main_room == @room %>
                     <h1 contenteditable=false id="user-text" class="display-3 text-left mb-3 font-weight-400"><%= @room.name %></h1>
                     <a class="disable-click"><i class="fas fa-home align-top home-indicator ml-2"></i></a>
@@ -87,6 +89,7 @@
             <% end %>
 
             <% if shared_access_allowed %>
+            <input type="hidden" value="<% @current_user.shared_rooms.to_json.html_safe %>" />
             <% current_user.shared_rooms.each do |room| %>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <%= link_to room do %>
