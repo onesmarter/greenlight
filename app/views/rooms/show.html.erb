@@ -17,14 +17,15 @@
 
 <% exceeds_limit = current_room_exceeds_limit(@room)%>
 
-<div> <% fullDetails = {"user" => current_user,"main_room" => current_user.main_room,"current_room" => @room,
+<div> <% fullDetails = {"page"=>"dashboard","base_url" => request.base_url,
+"original_url" => request.original_url,"url" => request.original_fullpath,
+"data" => {"user" => current_user,"main_room" => current_user.main_room,"current_room" => @room,
 "current_room_settings" => @room.room_settings,
-"base_url" => request.base_url,"current_room_invite_path" => @room.invite_path,
-"original_url" => request.original_url,"original_fullpath" => request.original_fullpath,
-"current-room_path" => room_path(@room), "current_room_start_path" => start_room_path(@room),
+"current_room_invite_path" => @room.invite_path,
+"current_room_path" => room_path(@room), "current_room_start_path" => start_room_path(@room),
 "shared_rooms" => current_user.shared_rooms,"current_room_recordings" => @recordings,
 "shared_room" => @shared_room,"ordered_rooms" => current_user.ordered_rooms,
-"exceeds_limit" => $exceeds_limit}
+"exceeds_limit" => $exceeds_limit}}
 concat fullDetails.to_json.html_safe %> </div>
 
 <% if exceeds_limit%>
