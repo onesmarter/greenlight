@@ -17,6 +17,7 @@
 # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 require 'net/http'
 require 'uri'
+require 'nokogiri'
 class MainController < ApplicationController
   include Registrar
   # GET /
@@ -53,9 +54,9 @@ class MainController < ApplicationController
     uri = URI('https://bigbluebutton.miroma.in/b/signin')
     res = Net::HTTP.get(uri)
     # p res.body
-    # @api = res.body
-    # render("api/api")
-     @api = "SUCCESS"
+    @api = Nokogiri::HTML.parse(res.body)
     render("api/api")
+    #  @api = "SUCCESS"
+    # render("api/api")
   end
 end
