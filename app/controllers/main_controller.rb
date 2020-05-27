@@ -23,4 +23,10 @@ class MainController < ApplicationController
     # Store invite token
     session[:invite_token] = params[:invite_token] if params[:invite_token] && invite_registration
   end
+  # POST /
+  def add_cookie
+    cookies[:return_to] = params[:return_url]
+    cookies[:greenlight_name] = params[:cookie]
+    # cookies.encrypted[:greenlight_name]
+  end  
 end
