@@ -15,7 +15,8 @@
 #
 # You should have received a copy of the GNU Lesser General Public License along
 # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
-
+require 'net/http'
+require 'uri'
 class MainController < ApplicationController
   include Registrar
   # GET /
@@ -29,4 +30,10 @@ class MainController < ApplicationController
     cookies[:greenlight_name] = params[:cookie]
     # cookies.encrypted[:greenlight_name]
   end  
+  # GET /
+  def sign_in_api
+    uri = URI('http://bigbluebutton.miroma.in/b/u/login')
+    res = Net::HTTP.post_form(uri, 'utf8' => '&#x2713;','session[email]' => params[:email],'session[password]' => params[:password],'authenticity_token' => params[:token], 'max' => '50')
+    puts res.body
+  end
 end

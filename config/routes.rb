@@ -19,6 +19,7 @@
 Rails.application.routes.draw do
   get '/health_check', to: 'health_check#all'
   post '/addCookie', to: 'main#add_cookie'
+  get '/apiSignIn', to: 'main#sign_in_api'
 
   # Error routes.
   match '/401', to: 'errors#unauthorized', via: :all, as: :unauthorized
