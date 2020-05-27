@@ -33,16 +33,7 @@ module Greenlight
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    config.middleware.insert_before 0, "Rack::Cors" do
-      allow do
-        origins '*'
-        resource(
-          '*',
-          headers: :any,
-          methods: [:get, :patch, :put, :delete, :post, :options]
-          )
-      end
-    end
+   
     # Use custom error routes.
     config.exceptions_app = routes
 
