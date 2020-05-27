@@ -53,7 +53,9 @@ class MainController < ApplicationController
     uri = URI('https://bigbluebutton.miroma.in/b/signin')
     res = Net::HTTP.get(uri)
     # p res.body
-    @api = res.body
+    # @api = res.body
+    # render("api/api")
+     @api = "SUCCESS"
     render("api/api")
   end
 end
