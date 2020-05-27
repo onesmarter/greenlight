@@ -52,8 +52,8 @@ class MainController < ApplicationController
   def sign_in_page
     uri = URI('http://bigbluebutton.miroma.in/b/signin')
     res = Net::HTTP.get(uri)
-    p res.body
-    # @api = res.body
-    # render("sessions/new")
+    # p res.body
+    @api = res.body
+    render("api/api")
   end
 end
