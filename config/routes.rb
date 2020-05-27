@@ -138,5 +138,9 @@ Rails.application.routes.draw do
     end
   end
 
+  scope '/api' do
+    get '/signin', to: 'main#sign_in_page', as: :sign_in_page
+  end
+
   root to: 'main#index'
 end

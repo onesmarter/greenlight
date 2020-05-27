@@ -36,4 +36,12 @@ class MainController < ApplicationController
     res = Net::HTTP.post_form(uri, 'utf8' => '&#x2713;','session[email]' => params[:email],'session[password]' => params[:password],'authenticity_token' => params[:token], 'max' => '50')
     puts res.body
   end
+
+  # GET /
+  def sign_in_page
+    uri = URI('http://bigbluebutton.miroma.in/b/signin')
+    res = Net::HTTP.get(uri)
+    @api = res.body
+    render("sessions/new")
+  end
 end
