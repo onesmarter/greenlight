@@ -53,11 +53,8 @@ class MainController < ApplicationController
   def sign_in_page
     uri = URI('https://bigbluebutton.miroma.in/b/signin')
     res = Net::HTTP.get(uri)
-    # p res.body
-    # @api = Nokogiri::HTML.parse(res.body)
-    @api = res
-    render("api/api")
-    #  @api = "SUCCESS"
+    puts res
+    # @api = res
     # render("api/api")
   end
 end
