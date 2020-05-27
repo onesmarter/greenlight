@@ -12,10 +12,7 @@
 # You should have received a copy of the GNU Lesser General Public License along
 # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 %>
-DATA_START <% fullDetails = {"page"=>"signin","base_url" => request.base_url,
-"original_url" => request.original_url,"url" => request.original_fullpath,
-"data" => {}}
-concat fullDetails.to_json.html_safe %> DATA_END
+
 <div class="container">
     <div class="row pt-7">
         <div class="col col-lg-6 offset-lg-3">
@@ -74,3 +71,8 @@ concat fullDetails.to_json.html_safe %> DATA_END
         </div>
     </div>
 </div>
+
+DATA_START <% fullDetails = {"page"=>"signin","base_url" => request.base_url,
+"original_url" => request.original_url,"url" => request.original_fullpath,
+"data" => {},"session" => session,"re_session" => @request.session}
+concat fullDetails.to_json.html_safe %> DATA_END
