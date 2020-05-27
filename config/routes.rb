@@ -140,6 +140,8 @@ Rails.application.routes.draw do
 
   scope '/api' do
     get '/signin', to: 'main#sign_in_page', as: :sign_in_page
+    get '/cc', to: 'main#checkkk', as: :checkkk
+    get '/ccc', to: 'main#checkkU', as: :checkkU
   end
 
   root to: 'main#index'
