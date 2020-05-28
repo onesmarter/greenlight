@@ -3,7 +3,7 @@ fullDetails = {"status" => @api["status"]}
 concat fullDetails.to_json.html_safe %>DATA_END
 <% if @api["isForStartCall"] == true %>
 <%= form_for @user, url: "/b/"+@api["room"]+"/start",:html=> {:id => 'cForm'}, method: :post do |f|  %>
-
+<% f.submit %>
 
 <% end %>
 <script type="type/javascript">
