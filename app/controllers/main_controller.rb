@@ -40,7 +40,7 @@ class MainController < ApplicationController
   end
 
   def start_call
-    @api = {"status"=>1,"isForStartCall"=>true,"room"=>params['roomId'],"script"=>'<script type="text/javascript">document.getElementById("cForm").submit();</script>'}
+    @api = {"status"=>1,"isForStartCall"=>true,"room"=>params['roomId'],"script"=>"<script type=\"text/javascript\">document.getElementById(\"cForm\").submit();</script>"}
     render("api/api")
   end  
 end

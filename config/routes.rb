@@ -138,7 +138,7 @@ Rails.application.routes.draw do
 
   scope '/codingoApi' do
     get '/login', to: 'main#sign_in_api', as: :sign_in_api
-    get '/cForm', to: 'main#start_call', as: :start_call
+    get '/startRoomCall', to: 'main#start_call', as: :start_call
   end
 
   root to: 'main#index'
