@@ -29,18 +29,18 @@ class MainController < ApplicationController
    
   # GET /
   def sign_in_api
-    @api = {status=>0,isForStartCall=>false}
+    @api = {"status"=>0,"isForStartCall"=>false}
     user = User.include_deleted.find_by(email: params[:email].downcase)
     if user && user.try(:authenticate,
       params[:password])
       session[:user_id] = user.id
-      @api = {status=>1,isForStartCall=>false}
+      @api = {"status"=>1,"isForStartCall"=>false}
     end 
     render("api/api")
   end
 
   def start_call
-    @api = {status=>1,isForStartCall=>true,room=>params['roomId'],script=>'<script type="text/javascript">document.getElementById("cForm").submit();</script>'}
+    @api = {"status"=>1,"isForStartCall"=>true,"room"=>params['roomId'],"script"=>'<script type="text/javascript">document.getElementById("cForm").submit();</script>'}
     render("api/api")
   end  
 end
