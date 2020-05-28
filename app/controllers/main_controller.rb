@@ -20,6 +20,7 @@ require 'uri'
 require 'nokogiri'
 class MainController < ApplicationController
   include Registrar
+  include Authenticator
   # GET /
   def index
     # Store invite token
@@ -33,9 +34,14 @@ class MainController < ApplicationController
   end  
   # GET /
   def sign_in_api
-    uri = URI('https://bigbluebutton.miroma.in/b/u/login')
-    @api = Net::HTTP.post_form(uri, 'utf8' => '&#x2713;','session[email]' => params[:email],'session[password]' => params[:password],'authenticity_token' => params[:token], 'max' => '50')
-    # @api = params
+    @api = "FAILED"
+    user = User.include_deleted.find_by(email: params[:email].downcase)
+    if user && user.try(:authenticate,
+      params[:password])
+      session[:user_id] = user.id
+      @api = "SUCCESS"
+    end  
+    
     render("api/api")
   end
 
