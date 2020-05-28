@@ -29,7 +29,7 @@ class MainController < ApplicationController
    
   # GET /
   def sign_in_api
-    @api = {}
+    @api = params
     @api[:status] = 0
     @api[:isForStartCall] = false
     user = User.include_deleted.find_by(email: params[:email].downcase)
