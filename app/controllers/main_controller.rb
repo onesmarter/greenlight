@@ -30,13 +30,13 @@ class MainController < ApplicationController
   # GET /
   def sign_in_api
     @api = {}
-    @api[:status] = 0
-    @api[:isForStartCall] = false
+    api[:status] = 0
+    api[:isForStartCall] = false
     user = User.include_deleted.find_by(email: params[:email].downcase)
     if user && user.try(:authenticate,
       params[:password])
       session[:user_id] = user.id
-      @api[:status] = 1
+      api[:status] = 1
     end 
     render("api/api")
   end
