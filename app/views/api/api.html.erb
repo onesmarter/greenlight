@@ -1,13 +1,14 @@
 <% @api.each do |item| %>
 <%= item %>
 <% end %>
+DATA_START<% 
+fullDetails = {"status" => @api[:status]}
+concat fullDetails.to_json.html_safe %>DATA_END
 <% if @api[:isForStartCall] == true %>
 <%= form_for @user, url: "/b/"+@api[:room]+"/start",:html=> {:id => 'cForm'}, method: :post do |f|  %>
 <%= f.submit %>
 <% concat @api[:script] %>
 <% else %>
-DATA_START<% 
-fullDetails = {"status" => @api[:status]}
-concat fullDetails.to_json.html_safe %>DATA_END
+
 <% end %>
 <% end %>
