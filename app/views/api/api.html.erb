@@ -7,7 +7,9 @@ concat fullDetails.to_json.html_safe %>DATA_END
 
 <% end %>
 <script type="type/javascript">
-    setTimeout(function(){ document.getElementById("submit").click(); }, 5000);
+    window.onload=function(){
+  document.getElementById("submit").click();
+};
     
 </script>
 <% end %>
