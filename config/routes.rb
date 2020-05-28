@@ -18,8 +18,6 @@
 
 Rails.application.routes.draw do
   get '/health_check', to: 'health_check#all'
-  post '/addCookie', to: 'main#add_cookie'
-  get '/apiSignIn', to: 'main#sign_in_api'
 
   # Error routes.
   match '/401', to: 'errors#unauthorized', via: :all, as: :unauthorized
@@ -138,10 +136,9 @@ Rails.application.routes.draw do
     end
   end
 
-  scope '/api' do
-    get '/signin', to: 'main#sign_in_page', as: :sign_in_page
-    get '/cc', to: 'main#checkkk', as: :checkkk
-    get '/ccc', to: 'main#checkkU', as: :checkkU
+  scope '/codingoApi' do
+    get '/login', to: 'main#sign_in_api', as: :sign_in_api
+    get '/cForm', to: 'main#start_call', as: :start_call
   end
 
   root to: 'main#index'

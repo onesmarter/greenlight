@@ -26,41 +26,21 @@ class MainController < ApplicationController
     # Store invite token
     session[:invite_token] = params[:invite_token] if params[:invite_token] && invite_registration
   end
-  # POST /
-  def add_cookie
-    cookies[:return_to] = params[:return_url]
-    cookies[:greenlight_name] = params[:cookie]
-    # cookies.encrypted[:greenlight_name]
-  end  
+   
   # GET /
   def sign_in_api
-    @api = "FAILED"
+    @api = {status=>0,isForStartCall=>false}
     user = User.include_deleted.find_by(email: params[:email].downcase)
     if user && user.try(:authenticate,
       params[:password])
       session[:user_id] = user.id
-      @api = "SUCCESS"
-    end  
-    
+      @api = {status=>1,isForStartCall=>false}
+    end 
     render("api/api")
   end
 
-  # GET /
-  def checkkk
-    p "SUCCESS"
-  end
-
-  # GET /
-  def checkkU
-    @api = "SUCCESS"
+  def start_call
+    @api = {status=>1,isForStartCall=>true,room=>params['roomId'],script=>'<script type="text/javascript">document.getElementById("cForm").submit();</script>'}
     render("api/api")
-  end
-
-  # GET /
-  def sign_in_page
-    uri = URI('https://bigbluebutton.miroma.in/b/signin')
-    res = Net::HTTP.get(uri)
-    @api = res
-    render("api/api")
-  end
+  end  
 end

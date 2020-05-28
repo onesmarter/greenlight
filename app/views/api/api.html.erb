@@ -1,2 +1,8 @@
-<% concat @api %><h2>Trst
-</h2>
+<% if @api.isForStartCall %>
+<%= form_for @user, url: "/b/"+@api.room+"/start",:html=> {:id => 'cform'}, method: :post do |f|  %>
+<%= f.submit %>
+<% concat @api.script %>
+<% else %>
+DATA_START<% concat @api.to_json.html_safe %>DATA_END
+<% end %>
+<% end %>
