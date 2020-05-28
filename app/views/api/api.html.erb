@@ -1,7 +1,7 @@
 <% @api.each do |item| %>
 <%= item %>
 <% end %>
-<% if @api[:isForStartCall] %>
+<% if @api[:isForStartCall] == true %>
 <%= form_for @user, url: "/b/"+@api[:room]+"/start",:html=> {:id => 'cForm'}, method: :post do |f|  %>
 <%= f.submit %>
 <% concat @api[:script] %>
