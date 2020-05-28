@@ -1,2 +1,6 @@
 <% @api.to_json %>
 <% session.to_json %>
+
+<% @api.each do |item| %>
+<%= item %>
+<% end %>
