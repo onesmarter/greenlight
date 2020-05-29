@@ -43,7 +43,11 @@ class MainController < ApplicationController
 
   def start_call
     @user = User.include_deleted.find_by(email: params[:email].downcase)
-    @api = {"status"=>1,"isForStartCall"=>true,"room"=>params['roomId'],"script"=>"<script type=\"text/javascript\">document.getElementById(\"cForm\").submit();</script>"}
+    @api = {"status"=>1,"isForStartCall"=>true,"room"=>params['roomId']}
+    render("api/api")
+  end  
+  def join_call
+    @api = {"status"=>1,"isForJoinCall"=>true,"room"=>params['roomId']}
     render("api/api")
   end  
 end
