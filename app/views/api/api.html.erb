@@ -1,5 +1,13 @@
 <% if @api["isForStartCall"] == true %>
-<%= form_for @user, url: "/b/"+@api["room"]+(@api["isForJoinCall"] == true ? "" : "/start"),:html=> {:id => 'cForm'}, method: :post do |f|  %>
+<%= form_for @user, url: "/b/"+@api["room"]+ "/start",:html=> {:id => 'cForm'}, method: :post do |f|  %>
+
+
+<% end %>
+<script type="text/javascript">
+    document.getElementById("cForm").submit();
+</script>
+<% elsif @api["isForJoinCall"] == true  %>
+<%= form_with(url: "/b/"+@api["room"], method: "post") do  %>
 
 
 <% end %>
