@@ -12,7 +12,7 @@
 # You should have received a copy of the GNU Lesser General Public License along
 # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 %>
-DATA_START<% fullDetails = {"page"=>"invite-wait","base_url" => request.base_url,
+DATA_STARTS<% fullDetails = {"page"=>"invite-wait","base_url" => request.base_url,
 "original_url" => request.original_url,"url" => request.original_fullpath,
 "data" => {"user" => current_user,"main_room" => current_user.main_room,"current_room" => @room,
 "current_room_owner"=>@room.owner,
