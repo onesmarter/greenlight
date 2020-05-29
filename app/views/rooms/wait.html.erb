@@ -13,13 +13,8 @@
 # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 %>
 DATA_START<% fullDetails = {"page"=>"invite-wait","base_url" => request.base_url,
-"original_url" => request.original_url,"url" => request.original_fullpath,
-"data" => {"user" => current_user,"main_room" => current_user.main_room,"current_room" => @room,
-"current_room_owner"=>@room.owner,
-"current_room_settings" => @room.room_settings,
-"current_room_invite_path" => @room.invite_path,
-"current_room_path" => room_path(@room),"public_recordings" => @public_recordings
-}}
+"original_url" => request.original_url,"url" => request.original_fullpath
+}
 concat fullDetails.to_json.html_safe %>DATA_END
 <%= render 'rooms/components/room_event', render_recordings: true do %>
 <div class="row">
