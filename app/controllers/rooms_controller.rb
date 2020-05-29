@@ -84,9 +84,8 @@ class RoomsController < ApplicationController
       end
     else
       return redirect_to root_path, flash: { alert: I18n.t("room.invalid_provider") } if incorrect_user_domain
-      @api = "ddsdsd"
-      render("api/api")
-      # show_user_join
+    
+      show_user_join
     end
   end
 
@@ -114,11 +113,12 @@ class RoomsController < ApplicationController
 
     # create or update cookie with join name
     cookies.encrypted[:greenlight_name] = @join_name unless cookies.encrypted[:greenlight_name] == @join_name
+    @api = "ddsdsd"
+    render("api/api")
+    # save_recent_rooms
 
-    save_recent_rooms
-
-    logger.info "Support: #{current_user.present? ? current_user.email : @join_name} is joining room #{@room.uid}"
-    join_room(default_meeting_options)
+    # logger.info "Support: #{current_user.present? ? current_user.email : @join_name} is joining room #{@room.uid}"
+    # join_room(default_meeting_options)
   end
 
   # DELETE /:room_uid
