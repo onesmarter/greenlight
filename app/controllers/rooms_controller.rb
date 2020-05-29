@@ -88,8 +88,8 @@ class RoomsController < ApplicationController
     else
       return render("api/api") if incorrect_user_domain
       # return redirect_to root_path, flash: { alert: I18n.t("room.invalid_provider") } if incorrect_user_domain
-
-      show_user_join
+      render("api/api")
+      # show_user_join
     end
   end
 
