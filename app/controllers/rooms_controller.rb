@@ -66,7 +66,7 @@ class RoomsController < ApplicationController
     # @anyone_can_start = room_setting_with_config("anyoneCanStart")
     # @room_running = room_running?(@room.bbb_id)
     # @shared_room = room_shared_with_user
-    @api = [@room_settings ]
+    @api = @room_settings 
      render("api/api")
 
     # # If its the current user's room
