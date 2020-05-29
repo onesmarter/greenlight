@@ -62,12 +62,12 @@ class RoomsController < ApplicationController
 
   # GET /:room_uid
   def show
-    @api = @room
+    @room_settings = @room[:room_settings]
+    @anyone_can_start = room_setting_with_config("anyoneCanStart")
+    @room_running = room_running?(@room.bbb_id)
+    @shared_room = room_shared_with_user
+    @api = [@room_settings,@anyone_can_start ,@room_running,@shared_room ]
      render("api/api")
-    # @room_settings = @room[:room_settings]
-    # @anyone_can_start = room_setting_with_config("anyoneCanStart")
-    # @room_running = room_running?(@room.bbb_id)
-    # @shared_room = room_shared_with_user
 
     # # If its the current user's room
     # if current_user && (@room.owned_by?(current_user) || @shared_room)
