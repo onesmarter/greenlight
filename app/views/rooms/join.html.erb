@@ -15,27 +15,27 @@
 
 <% valid_access_code = @room.access_code.nil? || @room.access_code.empty? || @room.access_code == session[:access_code] %>
 <%= render 'rooms/components/room_event', render_recordings: valid_access_code do %>
-  <% if room_authentication_required %>
-    <h2><%= t("administrator.site_settings.authentication.user-info") %></h2>
-  <% elsif !valid_access_code %>
-    <%= form_for :room, url: login_room_path(@room.uid) do |f| %>
-      <div class="input-group join-input">
-        <%= f.text_field :access_code,
+<% if room_authentication_required %>
+<h2><%= t("administrator.site_settings.authentication.user-info") %></h2>
+<% elsif !valid_access_code %>
+<%= form_for :room, url: login_room_path(@room.uid) do |f| %>
+<div class="input-group join-input">
+    <%= f.text_field :access_code,
               required: true,
               class: "form-control join-form",
               placeholder: t("room.enter_the_access_code"),
               value: "" ,
               autofocus: true %>
-        <%= f.submit t("room.login"), class: "btn btn-primary btn-sm col-sm-3 form-control join-form" %>
-      </div>
-    <% end %>
-  <% else %>
-    <%= form_for room_path(@room), method: :post do |f| %>
-      <div class="input-group">
-        <%= f.hidden_field(:search, :value => params[:search])%>
-        <%= f.hidden_field(:column, :value => params[:column])%>
-        <%= f.hidden_field(:direction, :value => params[:direction])%>
-        <%= f.text_field :join_name,
+    <%= f.submit t("room.login"), class: "btn btn-primary btn-sm col-sm-3 form-control join-form" %>
+</div>
+<% end %>
+<% else %>
+<%= form_for room_path(@room), method: :post do |f| %>
+<div class="input-group">
+    <%= f.hidden_field(:search, :value => params[:search])%>
+    <%= f.hidden_field(:column, :value => params[:column])%>
+    <%= f.hidden_field(:direction, :value => params[:direction])%>
+    <%= f.text_field :join_name,
             required: true,
             class: "form-control join-form",
             placeholder: t("enter_your_name"),
@@ -43,12 +43,12 @@
             readonly: !current_user.nil?, 
             autofocus: true
             %>
-        <span class="input-group-append">
-          <button type="submit" class="btn btn-primary btn-sm px-7 form-control join-form">
+    <span class="input-group-append">
+        <button type="submit" class="btn btn-primary btn-sm px-7 form-control join-form">
             <%= (!@room_running && @anyone_can_start) ? t("room.start") : t("room.join") %>
-          </button>
-        </span>
-      </div>
-    <% end %>
-  <% end %>
+        </button>
+    </span>
+</div>
+<% end %>
+<% end %>
 <% end %>

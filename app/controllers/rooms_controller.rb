@@ -66,8 +66,6 @@ class RoomsController < ApplicationController
     @anyone_can_start = room_setting_with_config("anyoneCanStart")
     @room_running = room_running?(@room.bbb_id)
     @shared_room = room_shared_with_user
-    @api = @room_settings 
-     
 
     # If its the current user's room
     if current_user && (@room.owned_by?(current_user) || @shared_room)
@@ -82,14 +80,12 @@ class RoomsController < ApplicationController
       else
         # Render view for users that cant create rooms
         @recent_rooms = Room.where(id: cookies.encrypted["#{current_user.uid}_recently_joined_rooms"])
-        # render :cant_create_rooms
-        render("api/api")
+        render :cant_create_rooms
       end
     else
-      return render("api/api") if incorrect_user_domain
-      # return redirect_to root_path, flash: { alert: I18n.t("room.invalid_provider") } if incorrect_user_domain
-      render("api/api")
-      # show_user_join
+      return redirect_to root_path, flash: { alert: I18n.t("room.invalid_provider") } if incorrect_user_domain
+
+      show_user_join
     end
   end
 
