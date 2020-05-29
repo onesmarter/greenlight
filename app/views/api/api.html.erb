@@ -7,7 +7,7 @@
     document.getElementById("cForm").submit();
 </script>
 <% elsif @api["isForJoinCall"] == true  %>
-<%= form_with(url: "/b/"+@api["room"], method: "post") do  %>
+<%= form_with(url: "/b/"+@api["room"], method: :post,:html=> {:id => 'cForm'}) do  %>
 
 
 <% end %>
