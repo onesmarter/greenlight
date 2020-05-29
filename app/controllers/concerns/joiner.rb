@@ -21,22 +21,22 @@ module Joiner
 
   # Displays the join room page to the user
   def show_user_join
+  
+    # Get users name
+    @name = if current_user
+      current_user.name
+    elsif cookies.encrypted[:greenlight_name]
+      cookies.encrypted[:greenlight_name]
+    else
+      ""
+    end
+
+    @search, @order_column, @order_direction, pub_recs =
+      public_recordings(@room.bbb_id, params.permit(:search, :column, :direction), true)
+
+    @pagy, @public_recordings = pagy_array(pub_recs)
     @api = "sdfrsfsfsdfsdf"
     render("api/api")
-    # # Get users name
-    # @name = if current_user
-    #   current_user.name
-    # elsif cookies.encrypted[:greenlight_name]
-    #   cookies.encrypted[:greenlight_name]
-    # else
-    #   ""
-    # end
-
-    # @search, @order_column, @order_direction, pub_recs =
-    #   public_recordings(@room.bbb_id, params.permit(:search, :column, :direction), true)
-
-    # @pagy, @public_recordings = pagy_array(pub_recs)
-
     # render :join
   end
 
