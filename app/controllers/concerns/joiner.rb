@@ -35,9 +35,7 @@ module Joiner
       public_recordings(@room.bbb_id, params.permit(:search, :column, :direction), true)
 
     @pagy, @public_recordings = pagy_array(pub_recs)
-    @api = "sdfrsfsfsdfsdf"
-    render("api/api")
-    # render :join
+    render :join
   end
 
   # create or update cookie to track the three most recent rooms a user joined
