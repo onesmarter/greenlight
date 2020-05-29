@@ -67,28 +67,30 @@ class RoomsController < ApplicationController
     @room_running = room_running?(@room.bbb_id)
     @shared_room = room_shared_with_user
     @api = @room_settings 
-     render("api/api")
+     
 
-    # # If its the current user's room
-    # if current_user && (@room.owned_by?(current_user) || @shared_room)
-    #   if current_user.highest_priority_role.get_permission("can_create_rooms")
-    #     # User is allowed to have rooms
-    #     @search, @order_column, @order_direction, recs =
-    #       recordings(@room.bbb_id, params.permit(:search, :column, :direction), true)
+    # If its the current user's room
+    if current_user && (@room.owned_by?(current_user) || @shared_room)
+      if current_user.highest_priority_role.get_permission("can_create_rooms")
+        # User is allowed to have rooms
+        @search, @order_column, @order_direction, recs =
+          recordings(@room.bbb_id, params.permit(:search, :column, :direction), true)
 
-    #     @user_list = shared_user_list if shared_access_allowed
+        @user_list = shared_user_list if shared_access_allowed
 
-    #     @pagy, @recordings = pagy_array(recs)
-    #   else
-    #     # Render view for users that cant create rooms
-    #     @recent_rooms = Room.where(id: cookies.encrypted["#{current_user.uid}_recently_joined_rooms"])
-    #     render :cant_create_rooms
-    #   end
-    # else
-    #   return redirect_to root_path, flash: { alert: I18n.t("room.invalid_provider") } if incorrect_user_domain
+        @pagy, @recordings = pagy_array(recs)
+      else
+        # Render view for users that cant create rooms
+        @recent_rooms = Room.where(id: cookies.encrypted["#{current_user.uid}_recently_joined_rooms"])
+        # render :cant_create_rooms
+        render("api/api")
+      end
+    else
+      return render("api/api") if incorrect_user_domain
+      # return redirect_to root_path, flash: { alert: I18n.t("room.invalid_provider") } if incorrect_user_domain
 
-    #   show_user_join
-    # end
+      show_user_join
+    end
   end
 
   # POST /:room_uid
