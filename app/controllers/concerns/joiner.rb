@@ -40,8 +40,8 @@ module Joiner
 
   # create or update cookie to track the three most recent rooms a user joined
   def save_recent_rooms
-    @api = "asddasd"
-    render("api/api")
+    # @api = "asddasd"
+    # render("api/api")
     if current_user
       recently_joined_rooms = cookies.encrypted["#{current_user.uid}_recently_joined_rooms"].to_a
       cookies.encrypted["#{current_user.uid}_recently_joined_rooms"] =
