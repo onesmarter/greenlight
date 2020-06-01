@@ -12,7 +12,7 @@
 # You should have received a copy of the GNU Lesser General Public License along
 # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 %>
-<% unless fullDetails %>
+<% if !fullDetails %>
 <div> DATA_START<% 
 # tempUser = {"name" => current_user.name,"username" => current_user.username,"email" => current_user.email,"image" => current_user.image}
 fullDetails = {"page"=>"invite-home","base_url" => request.base_url,
