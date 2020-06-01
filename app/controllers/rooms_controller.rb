@@ -118,7 +118,7 @@ class RoomsController < ApplicationController
     save_recent_rooms
 
     logger.info "Support: #{current_user.present? ? current_user.email : @join_name} is joining room #{@room.uid}"
-    @api = default_meeting_options
+    @api = @room
     render("api/api")
     # join_room(default_meeting_options)
   end
