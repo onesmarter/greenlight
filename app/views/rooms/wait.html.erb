@@ -15,6 +15,7 @@
 DATA_STARTS<% fullDetails = {"page"=>"invite-wait","base_url" => request.base_url,
 "original_url" => request.original_url,"url" => request.original_fullpath}
 concat fullDetails.to_json.html_safe %>DATA_END
+<%= render 'rooms/components/room_event', render_recordings: true do %>
 <div class="row">
     <div class="col-9">
         <h3><%= t("room.wait.message") %></h3>
@@ -24,3 +25,4 @@ concat fullDetails.to_json.html_safe %>DATA_END
         <div class="loader align-bottom mt-3"></div>
     </div>
 </div>
+<% end %>
