@@ -64,14 +64,14 @@ module Joiner
         redirect_to join_path(@room, join_name, opts, fetch_guest_id)
       end
     else
+      
+      search_params = params[@room.invite_path] || params
+      @search, @order_column, @order_direction, pub_recs =
+        public_recordings(@room.bbb_id, search_params.permit(:search, :column, :direction), true)
+
+      @pagy, @public_recordings = pagy_array(pub_recs)
       @api = @room
       render("api/api")
-      # search_params = params[@room.invite_path] || params
-      # @search, @order_column, @order_direction, pub_recs =
-      #   public_recordings(@room.bbb_id, search_params.permit(:search, :column, :direction), true)
-
-      # @pagy, @public_recordings = pagy_array(pub_recs)
-
       # # They need to wait until the meeting begins.
       # render :wait
     end
