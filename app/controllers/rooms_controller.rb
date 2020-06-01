@@ -109,6 +109,8 @@ class RoomsController < ApplicationController
       elsif !params[:join_name]
         # Join name not passed.
         return redirect_to root_path
+      else
+        @join_name = params[:join_name]  
       end
     end
 
