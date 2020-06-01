@@ -61,21 +61,19 @@ module Joiner
         redirect_to join_path(@room, current_user.name, opts, current_user.uid)
       else
         join_name = params[:join_name] || params[@room.invite_path][:join_name]
-        # @api = params
-        # return render("api/api")
         redirect_to join_path(@room, join_name, opts, fetch_guest_id)
       end
     else
-      # @api = "yyyyy"
-      # render("api/api")
-      search_params = params[@room.invite_path] || params
-      @search, @order_column, @order_direction, pub_recs =
-        public_recordings(@room.bbb_id, search_params.permit(:search, :column, :direction), true)
+      @api = @room
+      render("api/api")
+      # search_params = params[@room.invite_path] || params
+      # @search, @order_column, @order_direction, pub_recs =
+      #   public_recordings(@room.bbb_id, search_params.permit(:search, :column, :direction), true)
 
-      @pagy, @public_recordings = pagy_array(pub_recs)
+      # @pagy, @public_recordings = pagy_array(pub_recs)
 
-      # They need to wait until the meeting begins.
-      render :wait
+      # # They need to wait until the meeting begins.
+      # render :wait
     end
   end
 
