@@ -94,30 +94,32 @@ class RoomsController < ApplicationController
     return redirect_to root_path,
       flash: { alert: I18n.t("administrator.site_settings.authentication.user-info") } if auth_required
 
-    @shared_room = room_shared_with_user
+    @api = "asdsdsadsadasdasdasdasdasdasd"
+    render("api/api")
+    # @shared_room = room_shared_with_user
 
-    unless @room.owned_by?(current_user) || @shared_room
-      # Don't allow users to join unless they have a valid access code or the room doesn't have an access code
-      if @room.access_code && !@room.access_code.empty? && @room.access_code != session[:access_code]
-        return redirect_to room_path(room_uid: params[:room_uid]), flash: { alert: I18n.t("room.access_code_required") }
-      end
+    # unless @room.owned_by?(current_user) || @shared_room
+    #   # Don't allow users to join unless they have a valid access code or the room doesn't have an access code
+    #   if @room.access_code && !@room.access_code.empty? && @room.access_code != session[:access_code]
+    #     return redirect_to room_path(room_uid: params[:room_uid]), flash: { alert: I18n.t("room.access_code_required") }
+    #   end
 
-      # Assign join name if passed.
-      if params[@room.invite_path]
-        @join_name = params[@room.invite_path][:join_name]
-      elsif !params[:join_name]
-        # Join name not passed.
-        return redirect_to root_path
-      end
-    end
+    #   # Assign join name if passed.
+    #   if params[@room.invite_path]
+    #     @join_name = params[@room.invite_path][:join_name]
+    #   elsif !params[:join_name]
+    #     # Join name not passed.
+    #     return redirect_to root_path
+    #   end
+    # end
 
-    # create or update cookie with join name
-    cookies.encrypted[:greenlight_name] = @join_name unless cookies.encrypted[:greenlight_name] == @join_name
+    # # create or update cookie with join name
+    # cookies.encrypted[:greenlight_name] = @join_name unless cookies.encrypted[:greenlight_name] == @join_name
     
-    save_recent_rooms
+    # save_recent_rooms
 
-    logger.info "Support: #{current_user.present? ? current_user.email : @join_name} is joining room #{@room.uid}"
-    join_room(default_meeting_options)
+    # logger.info "Support: #{current_user.present? ? current_user.email : @join_name} is joining room #{@room.uid}"
+    # join_room(default_meeting_options)
   end
 
   # DELETE /:room_uid
