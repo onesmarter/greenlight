@@ -64,7 +64,7 @@ module Joiner
         redirect_to join_path(@room, join_name, opts, fetch_guest_id)
       end
     else
-      @api = "ddsfsfsdfsdfs"
+      @api = @room
       render("api/api")
       # search_params = params[@room.invite_path] || params
       # @search, @order_column, @order_direction, pub_recs =
