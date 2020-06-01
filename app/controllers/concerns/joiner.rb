@@ -70,10 +70,10 @@ module Joiner
         public_recordings(@room.bbb_id, search_params.permit(:search, :column, :direction), true)
 
       @pagy, @public_recordings = pagy_array(pub_recs)
-      @api = @room
-      render("api/api")
+      # @api = @room
+      # render("api/api")
       # # They need to wait until the meeting begins.
-      # render :wait
+      render :wait
     end
   end
 
