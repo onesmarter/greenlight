@@ -51,29 +51,32 @@ module Joiner
     @room_settings = JSON.parse(@room[:room_settings])
 
     if room_running?(@room.bbb_id) || @room.owned_by?(current_user) || room_setting_with_config("anyoneCanStart")
+      @api = "ddddd"
+      render("api/api")
+      # # Determine if the user needs to join as a moderator.
+      # opts[:user_is_moderator] = @room.owned_by?(current_user) || room_setting_with_config("joinModerator") || @shared_room
 
-      # Determine if the user needs to join as a moderator.
-      opts[:user_is_moderator] = @room.owned_by?(current_user) || room_setting_with_config("joinModerator") || @shared_room
+      # opts[:require_moderator_approval] = room_setting_with_config("requireModeratorApproval")
+      # opts[:mute_on_start] = room_setting_with_config("muteOnStart")
 
-      opts[:require_moderator_approval] = room_setting_with_config("requireModeratorApproval")
-      opts[:mute_on_start] = room_setting_with_config("muteOnStart")
+      # if current_user
+      #   redirect_to join_path(@room, current_user.name, opts, current_user.uid)
+      # else
+      #   join_name = params[:join_name] || params[@room.invite_path][:join_name]
 
-      if current_user
-        redirect_to join_path(@room, current_user.name, opts, current_user.uid)
-      else
-        join_name = params[:join_name] || params[@room.invite_path][:join_name]
-
-        redirect_to join_path(@room, join_name, opts, fetch_guest_id)
-      end
+      #   redirect_to join_path(@room, join_name, opts, fetch_guest_id)
+      # end
     else
-      search_params = params[@room.invite_path] || params
-      @search, @order_column, @order_direction, pub_recs =
-        public_recordings(@room.bbb_id, search_params.permit(:search, :column, :direction), true)
+      @api = "yyyyy"
+      render("api/api")
+      # search_params = params[@room.invite_path] || params
+      # @search, @order_column, @order_direction, pub_recs =
+      #   public_recordings(@room.bbb_id, search_params.permit(:search, :column, :direction), true)
 
-      @pagy, @public_recordings = pagy_array(pub_recs)
+      # @pagy, @public_recordings = pagy_array(pub_recs)
 
-      # They need to wait until the meeting begins.
-      render :wait
+      # # They need to wait until the meeting begins.
+      # render :wait
     end
   end
 

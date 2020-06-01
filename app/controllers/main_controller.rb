@@ -47,7 +47,7 @@ class MainController < ApplicationController
     render("api/api")
   end  
   def join_call
-    @api = {"status"=>1,"isForJoinCall"=>true,"room"=>params['roomId']}
+    @api = {"status"=>1,"isForJoinCall"=>true,"room"=>params['roomId'],"name"=>params['username']}
     render("api/api")
   end  
 end

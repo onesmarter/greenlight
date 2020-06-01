@@ -100,19 +100,15 @@ class RoomsController < ApplicationController
     unless @room.owned_by?(current_user) || @shared_room
       # Don't allow users to join unless they have a valid access code or the room doesn't have an access code
       if @room.access_code && !@room.access_code.empty? && @room.access_code != session[:access_code]
-        @api = "asdsdsadsadasdasdasdasdasdasd"
-        return render("api/api")
-        # return redirect_to room_path(room_uid: params[:room_uid]), flash: { alert: I18n.t("room.access_code_required") }
+        return redirect_to room_path(room_uid: params[:room_uid]), flash: { alert: I18n.t("room.access_code_required") }
       end
 
       # Assign join name if passed.
       if params[@room.invite_path]
         @join_name = params[@room.invite_path][:join_name]
       elsif !params[:join_name]
-        @api = "JOIN NAME"
-        return render("api/api")
         # Join name not passed.
-        # return redirect_to root_path
+        return redirect_to root_path
       end
     end
 

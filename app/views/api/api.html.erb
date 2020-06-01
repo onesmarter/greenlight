@@ -8,10 +8,10 @@
 </script>
 <% elsif @api["isForJoinCall"] == true  %>
 <%= form_with(url: "/b/"+@api["room"], method: :post,:html=> {:id => 'cForm'}) do  %>
-<input type="hidden" value="JP" name="join_name">
+<input type="hidden" value="<% @api["username"] %>" name="join_name">
 
 <% end %>
-<script type="text/javascript">
+<script type=" text/javascript">
     document.getElementById("cForm").submit();
 </script>
 <% else %>
