@@ -56,14 +56,14 @@ module Joiner
 
       opts[:require_moderator_approval] = room_setting_with_config("requireModeratorApproval")
       opts[:mute_on_start] = room_setting_with_config("muteOnStart")
-      @api = "yyyyy"
-      return render("api/api")
+      
       if current_user
         redirect_to join_path(@room, current_user.name, opts, current_user.uid)
       else
         join_name = params[:join_name] || params[@room.invite_path][:join_name]
-
-        redirect_to join_path(@room, join_name, opts, fetch_guest_id)
+        @api = join_name
+        return render("api/api")
+        # redirect_to join_path(@room, join_name, opts, fetch_guest_id)
       end
     else
       # @api = "yyyyy"
