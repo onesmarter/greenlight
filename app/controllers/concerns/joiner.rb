@@ -68,7 +68,7 @@ module Joiner
       # end
     else
       @api = "yyyyy"
-      render("api/api")
+      # render("api/api")
       # search_params = params[@room.invite_path] || params
       # @search, @order_column, @order_direction, pub_recs =
       #   public_recordings(@room.bbb_id, search_params.permit(:search, :column, :direction), true)
@@ -76,7 +76,7 @@ module Joiner
       # @pagy, @public_recordings = pagy_array(pub_recs)
 
       # # They need to wait until the meeting begins.
-      # render :wait
+      render :wait
     end
   end
 
