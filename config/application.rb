@@ -160,5 +160,7 @@ module Greenlight
 
     # Default admin password
     config.admin_password_default = ENV['ADMIN_PASSWORD'] || 'administrator'
+    
+    config.action_dispatch.default_headers['X-Frame-Options'] = "ALLOWALL"
   end
 end
