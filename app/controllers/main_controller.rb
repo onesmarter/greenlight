@@ -21,7 +21,6 @@ require 'nokogiri'
 class MainController < ApplicationController
   include Registrar
   include Authenticator
-  include RoomsController
   # GET /
   def index
     # Store invite token

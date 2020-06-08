@@ -140,7 +140,7 @@ Rails.application.routes.draw do
     get '/login', to: 'main#sign_in_api', as: :sign_in_api
     get '/startRoomCall', to: 'main#start_call', as: :start_call
     get '/joinRoomCall', to: 'main#join_call', as: :join_call
-    get '/createRoom', to: 'main#create_room', as: :create_room
+    get '/createRoom', to: 'rooms#create_from_api', as: :create_from_api
   end
 
   root to: 'main#index'
