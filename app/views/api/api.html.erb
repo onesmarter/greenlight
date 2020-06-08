@@ -16,7 +16,7 @@
 </script>
 <% else %>
 DATA_START<% 
-fullDetails =  @api
+fullDetails = {"status" => @api["status"]}
 concat fullDetails.to_json.html_safe %>DATA_END
 <% end %>
 
