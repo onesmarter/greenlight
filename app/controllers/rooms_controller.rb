@@ -27,12 +27,50 @@ class RoomsController < ApplicationController
                 unless: -> { !Rails.configuration.enable_email_verification }
   before_action :find_room, except: [:create, :create_from_api, :join_specific_room]
   before_action :verify_room_ownership_or_admin_or_shared, only: [:start, :shared_access]
-  before_action :verify_room_ownership_or_admin, only: [:update_settings, :destroy]
+  before_action :verify_room_ownership_or_admin, only: [:update_settings, :destroy, :destroy_from_api]
   before_action :verify_room_ownership_or_shared, only: [:remove_shared_access]
   before_action :verify_room_owner_verified, only: [:show, :join],
                 unless: -> { !Rails.configuration.enable_email_verification }
   before_action :verify_room_owner_valid, only: [:show, :join]
   before_action :verify_user_not_admin, only: [:show]
+
+  # API CALLS
+  # GET /
+  def create_from_api
+    @api = {"status"=>0,"isForCreateRoom"=>true,"msg"=>"Room creation failed"}
+    if current_user
+      if room_limit_exceeded
+        @api[:msg] = "Room limit exceeded"
+      else
+        @room = Room.new(name: room_params[:name], access_code: room_params[:access_code])
+        @room.owner = current_user
+        @room.room_settings = create_room_settings_string(room_params)  
+        if @room.save
+          @api = {"status"=>1,"isForCreateRoom"=>true,"msg"=>"Successfully created new room","data"=>@room}
+        end  
+      end
+    else
+      @api[:msg] = "You are not logged in"
+    end  
+    render("api/api")
+  end  
+  
+  def destroy_from_api
+    begin
+      @api = {"status"=>1,"isForDeleteRoom"=>true,"msg"=>"Room deletion success"}
+      # Don't delete the users home room.
+      if @room != @room.owner.main_room
+        @room.destroy
+    rescue => e
+      @api = {"status"=>0,"isForDeleteRoom"=>true,"msg"=>"Room deletion failed"}
+    else
+      @api = {"status"=>0,"isForDeleteRoom"=>true,"msg"=>"Cannot delete home room"}
+    end
+  end  
+
+  # API CALLS END
+
+
 
   # POST /
   def create
@@ -60,26 +98,7 @@ class RoomsController < ApplicationController
     start
   end
 
-  # GET /
-  def create_from_api
-    @api = {"status"=>0,"isForCreateRoom"=>true,"msg"=>"Room creation failed"}
-    if current_user
-      if room_limit_exceeded
-        @api[:msg] = "Room limit exceeded"
-      else
-        @api[:msg] = room_params
-        @room = Room.new(name: room_params[:name], access_code: room_params[:access_code])
-        @room.owner = current_user
-        @room.room_settings = create_room_settings_string(room_params)  
-        if @room.save
-          @api = {"status"=>1,"isForCreateRoom"=>true,"msg"=>"Successfully created new room","data"=>@room}
-        end  
-      end
-    else
-      @api[:msg] = "You are not logged in"
-    end  
-    render("api/api")
-  end
+  
 
   # GET /:room_uid
   def show

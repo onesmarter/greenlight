@@ -141,6 +141,7 @@ Rails.application.routes.draw do
     get '/startRoomCall', to: 'main#start_call', as: :start_call
     get '/joinRoomCall', to: 'main#join_call', as: :join_call
     get '/createRoom', to: 'rooms#create_from_api', as: :create_from_api
+    get '/deleteRoom', to: 'rooms#destroy_from_api', as: :destroy_from_api
   end
 
   root to: 'main#index'
