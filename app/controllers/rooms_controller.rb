@@ -68,7 +68,7 @@ class RoomsController < ApplicationController
         @room.destroy
       end  
     rescue => e
-      @api = {"status"=>0,"isForDeleteRoom"=>true,"msg"=>"Cannot delete home room"}
+      @api = {"status"=>0,"isForDeleteRoom"=>true,"msg"=>"Cannot delete the room"}
     # else
     #   @api = {"status"=>0,"isForDeleteRoom"=>true,"msg"=>"Cannot delete home room"}
     end
