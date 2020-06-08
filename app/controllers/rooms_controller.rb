@@ -60,6 +60,7 @@ class RoomsController < ApplicationController
     start
   end
 
+  # GET /
   def create_from_api
     @api = {"status"=>0,"isForCreateRoom"=>true,"msg"=>"Room creation failed"}
     # if current_user
