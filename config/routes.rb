@@ -124,7 +124,6 @@ Rails.application.routes.draw do
     post '/start', to: 'rooms#start', as: :start_room
     get '/logout', to: 'rooms#logout', as: :logout_room
     post '/login', to: 'rooms#login', as: :login_room
-    get '/createRoom', to: 'rooms#create_from_api', as: :create_from_api
   end
 
   # Recording operations routes
