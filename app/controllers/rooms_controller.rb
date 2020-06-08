@@ -64,13 +64,12 @@ class RoomsController < ApplicationController
     begin
       @api = {"status"=>1,"isForDeleteRoom"=>true,"msg"=>"Room deletion success"}
       # Don't delete the users home room.
-      if @room
-        # @room.destroy
-        @api = {"status"=>1,"isForDeleteRoom"=>true,"msg"=>"Room deletion success----"}
+      raise I18n.t("room.delete.home_room") if !@room || @room == @room.owner.main_room
+      @room.destroy
     rescue => e
       @api = {"status"=>0,"isForDeleteRoom"=>true,"msg"=>"Room deletion failed"}
-    else
-      @api = {"status"=>0,"isForDeleteRoom"=>true,"msg"=>"Cannot delete home room"}
+    # else
+    #   @api = {"status"=>0,"isForDeleteRoom"=>true,"msg"=>"Cannot delete home room"}
     end
     render("api/api")
   end  
