@@ -65,7 +65,7 @@ class MainController < ApplicationController
         # if room.save
         #   @api = {"status"=>1,"isForCreateRoom"=>true,"msg"=>"Successfully created new room","data"=>room}
         # end  
-      end
+      # end
     else
       @api[:msg] = "You are not logged in"
     end  
