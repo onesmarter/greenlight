@@ -15,8 +15,8 @@
     document.getElementById("cForm").submit();
 </script>
 <% else %>
-DATA_STARTo<% 
-fullDetails = {"status" => @api["status"]}
+DATA_START<% 
+fullDetails =  @api
 concat fullDetails.to_json.html_safe %>DATA_END
 <% end %>
 
