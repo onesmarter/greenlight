@@ -62,9 +62,9 @@ class MainController < ApplicationController
       @room = Room.new(name: params[:name], access_code: params[:access_code])
       @room.owner = current_user
       @room.room_settings = create_room_settings_string(room_params)  
-      if @room.save
-        @api = {"status"=>1,"isForCreateRoom"=>true,"msg"=>"Successfully created new room","data"=>@room}
-      end  
+      # if @room.save
+      #   @api = {"status"=>1,"isForCreateRoom"=>true,"msg"=>"Successfully created new room","data"=>@room}
+      # end  
       # end
     else
       @api[:msg] = "You are not logged in"
