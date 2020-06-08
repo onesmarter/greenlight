@@ -64,7 +64,7 @@ class RoomsController < ApplicationController
     begin
       @api = {"status"=>1,"isForDeleteRoom"=>true,"msg"=>"Room deletion success"}
       # Don't delete the users home room.
-      # if @room && @room != @room.owner.main_room
+      if @room 
         # @room.destroy
         @api = {"status"=>1,"isForDeleteRoom"=>true,"msg"=>"Room deletion success----"}
     rescue => e
