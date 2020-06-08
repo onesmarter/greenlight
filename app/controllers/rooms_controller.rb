@@ -22,17 +22,17 @@ class RoomsController < ApplicationController
   include Joiner
   include Populator
 
-  before_action :validate_accepted_terms, unless: -> { !Rails.configuration.terms }
-  before_action :validate_verified_email, except: [:show, :join],
-                unless: -> { !Rails.configuration.enable_email_verification }
-  before_action :find_room, except: [:create, :join_specific_room]
-  before_action :verify_room_ownership_or_admin_or_shared, only: [:start, :shared_access]
-  before_action :verify_room_ownership_or_admin, only: [:update_settings, :destroy]
-  before_action :verify_room_ownership_or_shared, only: [:remove_shared_access]
-  before_action :verify_room_owner_verified, only: [:show, :join],
-                unless: -> { !Rails.configuration.enable_email_verification }
-  before_action :verify_room_owner_valid, only: [:show, :join]
-  before_action :verify_user_not_admin, only: [:show]
+  # before_action :validate_accepted_terms, unless: -> { !Rails.configuration.terms }
+  # before_action :validate_verified_email, except: [:show, :join],
+  #               unless: -> { !Rails.configuration.enable_email_verification }
+  # before_action :find_room, except: [:create, :join_specific_room]
+  # before_action :verify_room_ownership_or_admin_or_shared, only: [:start, :shared_access]
+  # before_action :verify_room_ownership_or_admin, only: [:update_settings, :destroy]
+  # before_action :verify_room_ownership_or_shared, only: [:remove_shared_access]
+  # before_action :verify_room_owner_verified, only: [:show, :join],
+  #               unless: -> { !Rails.configuration.enable_email_verification }
+  # before_action :verify_room_owner_valid, only: [:show, :join]
+  # before_action :verify_user_not_admin, only: [:show]
 
   # POST /
   def create
