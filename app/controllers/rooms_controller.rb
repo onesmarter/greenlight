@@ -57,18 +57,19 @@ class RoomsController < ApplicationController
   
   # GET /
   def destroy_from_api
-    params[:room_uid] = room_params[:roomId]
-    @room = find_room
-    begin
-      @api = {"status"=>1,"isForDeleteRoom"=>true,"msg"=>"Room deletion success"}
-      # Don't delete the users home room.
-      if @room && @room != @room.owner.main_room
-        @room.destroy
-    rescue => e
-      @api = {"status"=>0,"isForDeleteRoom"=>true,"msg"=>"Room deletion failed"}
-    else
-      @api = {"status"=>0,"isForDeleteRoom"=>true,"msg"=>"Cannot delete home room"}
-    end
+    @api = room_params;
+    # params[:room_uid] = room_params[:roomId]
+    # @room = find_room
+    # begin
+    #   @api = {"status"=>1,"isForDeleteRoom"=>true,"msg"=>"Room deletion success"}
+    #   # Don't delete the users home room.
+    #   if @room && @room != @room.owner.main_room
+    #     @room.destroy
+    # rescue => e
+    #   @api = {"status"=>0,"isForDeleteRoom"=>true,"msg"=>"Room deletion failed"}
+    # else
+    #   @api = {"status"=>0,"isForDeleteRoom"=>true,"msg"=>"Cannot delete home room"}
+    # end
     render("api/api")
   end  
 
