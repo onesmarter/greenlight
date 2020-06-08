@@ -60,7 +60,7 @@ class RoomsController < ApplicationController
     # params[:room_uid] = room_params[:roomId]
     # @room = find_room
     # begin
-      @api = {"status"=>1,"isForDeleteRoom"=>true,"msg"=>"Room deletion success"}
+    @api = {"status"=>1,"isForDeleteRoom"=>true,"msg"=>"Room deletion success"}
     #   # Don't delete the users home room.
     #   if @room && @room != @room.owner.main_room
     #     @room.destroy
