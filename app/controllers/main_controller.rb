@@ -51,6 +51,7 @@ class MainController < ApplicationController
     render("api/api")
   end  
 
+  # POST /
   def create_room 
      @api = {"status"=>0,"isForCreateRoom"=>true,"msg"=>"Room creation failed"}
     # if current_user
