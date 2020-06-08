@@ -68,12 +68,12 @@ class RoomsController < ApplicationController
         @api[:msg] = "Room limit exceeded"
       else
         @api[:msg] = "Room CREATION"
-        @room = Room.new(name: room_params[:name], access_code: room_params[:access_code])
-        @room.owner = current_user
-        @room.room_settings = create_room_settings_string(room_params)  
-        if @room.save
-          @api = {"status"=>1,"isForCreateRoom"=>true,"msg"=>"Successfully created new room","data"=>@room}
-        end  
+        # @room = Room.new(name: room_params[:name], access_code: room_params[:access_code])
+        # @room.owner = current_user
+        # @room.room_settings = create_room_settings_string(room_params)  
+        # if @room.save
+        #   @api = {"status"=>1,"isForCreateRoom"=>true,"msg"=>"Successfully created new room","data"=>@room}
+        # end  
       end
     else
       @api[:msg] = "You are not logged in"
