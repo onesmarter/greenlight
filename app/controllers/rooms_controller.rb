@@ -25,7 +25,7 @@ class RoomsController < ApplicationController
   before_action :validate_accepted_terms, unless: -> { !Rails.configuration.terms }
   before_action :validate_verified_email, except: [:show, :join],
                 unless: -> { !Rails.configuration.enable_email_verification }
-  before_action :find_room, except: [:create, :create_from_api, :join_specific_room]
+  before_action :find_room, except: [:create, :create_from_api, :join_specific_room, :destroy_from_api]
   before_action :verify_room_ownership_or_admin_or_shared, only: [:start, :shared_access]
   before_action :verify_room_ownership_or_admin, only: [:update_settings, :destroy, :destroy_from_api]
   before_action :verify_room_ownership_or_shared, only: [:remove_shared_access]
@@ -56,10 +56,12 @@ class RoomsController < ApplicationController
   end  
   
   def destroy_from_api
+    params[:room_uid] = room_params[:roomId]
+    @room = find_room
     begin
       @api = {"status"=>1,"isForDeleteRoom"=>true,"msg"=>"Room deletion success"}
       # Don't delete the users home room.
-      if @room != @room.owner.main_room
+      if @room && @room != @room.owner.main_room
         @room.destroy
     rescue => e
       @api = {"status"=>0,"isForDeleteRoom"=>true,"msg"=>"Room deletion failed"}
