@@ -57,7 +57,7 @@ class RoomsController < ApplicationController
   
   # GET /
   def destroy_from_api
-    @api = room_params;
+    @api = Room.includes(:owner).find_by!(uid: room_params[:roomId])
     # params[:room_uid] = room_params[:roomId]
     # @room = find_room
     # begin
