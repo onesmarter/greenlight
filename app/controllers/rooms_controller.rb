@@ -62,8 +62,11 @@ class RoomsController < ApplicationController
       @room = Room.includes(:owner).find_by!(uid: room_params[:access_code])
       @api = {"status"=>1,"isForDeleteRoom"=>true,"msg"=>"Room deletion success"}
       # Don't delete the users home room.
-      raise I18n.t("room.delete.home_room") if @room.nil? || @room == @room.owner.main_room
-      @room.destroy
+      if @room.nil? || @room == @room.owner.main_room
+        @api = {"status"=>0,"isForDeleteRoom"=>true,"msg"=>"Cannot delete home room"}
+      else  
+        @room.destroy
+      end  
     rescue => e
       @api = {"status"=>0,"isForDeleteRoom"=>true,"msg"=>"Cannot delete home room"}
     # else
