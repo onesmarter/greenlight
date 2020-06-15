@@ -217,7 +217,7 @@ class RoomsController < ApplicationController
     opts[:require_moderator_approval] = room_setting_with_config("requireModeratorApproval")
 
     begin
-       join_path(@room, current_user.name, opts, current_user.uid)
+      redirect_to join_path(@room, current_user.name, opts, current_user.uid)
     rescue BigBlueButton::BigBlueButtonException => e
       logger.error("Support: #{@room.uid} start failed: #{e}")
 
@@ -226,7 +226,7 @@ class RoomsController < ApplicationController
 
     # Notify users that the room has started.
     # Delay 5 seconds to allow for server start, although the request will retry until it succeeds.
-    # NotifyUserWaitingJob.set(wait: 5.seconds).perform_later(@room)
+    NotifyUserWaitingJob.set(wait: 5.seconds).perform_later(@room)
   end
 
   # POST /:room_uid/update_settings
